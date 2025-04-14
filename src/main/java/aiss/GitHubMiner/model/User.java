@@ -11,7 +11,7 @@ public class User {
     public String id;
 
     @JsonProperty("login")
-    public String login;
+    public String username;
 
     @JsonProperty("name")
     public String name;
@@ -19,14 +19,14 @@ public class User {
     @JsonProperty("avatar_url")
     public String avatarUrl;
 
-    @JsonProperty("html_url")
+    @JsonProperty("url")
     public String webUrl;
 
     @Override
     public String toString() {
         return "User{" +
                 "id='" + id + '\'' +
-                ", login='" + login + '\'' +
+                ", username='" + username + '\'' +
                 ", name='" + name + '\'' +
                 ", avatarUrl='" + avatarUrl + '\'' +
                 ", webUrl='" + webUrl + '\'' +
