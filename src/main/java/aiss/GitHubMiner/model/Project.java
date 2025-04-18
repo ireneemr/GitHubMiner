@@ -42,4 +42,13 @@ public class Project {
     public void setWeb_url(String web_url) {
         this.web_url = web_url;
     }
+
+    @Override
+    public String toString() {
+        return "Project{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", web_url='" + web_url + '\'' +
+                '}';
+    }
 }
