@@ -49,7 +49,7 @@ public class Issue {
 
 
     }
-
+    //Getters & Setters
     public String getId() {
         return id;
     }
@@ -121,6 +121,8 @@ public class Issue {
     public void setClosedAt(String closedAt) {
         this.closedAt = closedAt;
     }
+
+    //ToString
 
     @Override
     public String toString() {
