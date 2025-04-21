@@ -1,8 +1,9 @@
 package aiss.GitHubMiner.Service;
 
 import aiss.GitHubMiner.model.Commit;
-import aiss.GitHubMiner.model.CommitDto;
+import aiss.GitHubMiner.model.Dto.CommitDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.http.*;
@@ -13,6 +14,9 @@ import java.util.List;
 @Service
 public class CommitService {
 
+    @Value("${token}")
+    private String token;
+
     @Autowired
     RestTemplate restTemplate;
 
@@ -22,7 +26,7 @@ public class CommitService {
 
         List<Commit> result = new ArrayList<>();
         HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", "Bearer TU_TOKEN"); // Sustituye TU_TOKEN por el tuyo
+        headers.set("Authorization", "Bearer" + token);
 
         for (int i = 1; i <= maxPages; i++) {
             String uri = baseUri + owner + "/" + repo + "/commits?page=" + i + "&per_page=30";

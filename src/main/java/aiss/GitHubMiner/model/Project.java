@@ -2,6 +2,9 @@ package aiss.GitHubMiner.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Project {
     @JsonProperty("id")
     private String id;
@@ -12,11 +15,15 @@ public class Project {
     @JsonProperty("web_url")
     private String web_url;
 
+    @JsonProperty("commits")
+    private List<Commit> commits;
+
     //Constructor
     public Project(String id, String name, String web_url) {
         this.id = id;
         this.name = name;
         this.web_url = web_url;
+        this.commits = commits;
     }
     //Getters & Setters
     public String getName() {
@@ -43,13 +50,24 @@ public class Project {
         this.web_url = web_url;
     }
 
+    public List<Commit> getCommits() {
+        return commits;
+    }
+
+    public void setCommits(List<Commit> commits) {
+        this.commits = commits;
+    }
+
     //ToString
+
+
     @Override
     public String toString() {
         return "Project{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", web_url='" + web_url + '\'' +
+                ", commits=" + commits +
                 '}';
     }
 }
