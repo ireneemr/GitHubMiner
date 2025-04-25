@@ -58,16 +58,16 @@ public class User {
         return avatar_url;
     }
 
-    public void setAvatarUrl(String avatarUrl) {
-        this.avatar_url = avatarUrl;
+    public void setAvatarUrl(String avatar_url) {
+        this.avatar_url = avatar_url;
     }
 
     public String getWebUrl() {
         return web_url;
     }
 
-    public void setWebUrl(String webUrl) {
-        this.web_url = webUrl;
+    public void setWebUrl(String web_url) {
+        this.web_url = web_url;
     }
 
     @Override

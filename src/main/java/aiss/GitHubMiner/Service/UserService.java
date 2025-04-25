@@ -40,8 +40,8 @@ public class UserService {
                 dto.getId(),
                 dto.getUsername(),
                 dto.getName(),
-                dto.getAvatarUrl(),
-                dto.getWebUrl()
+                dto.getAvatar_url(),
+                dto.getWeb_url()
         );
     }
 }
