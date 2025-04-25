@@ -1,7 +1,6 @@
 
 package aiss.GitHubMiner.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class User {
