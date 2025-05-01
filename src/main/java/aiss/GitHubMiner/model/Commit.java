@@ -1,11 +1,20 @@
 package aiss.GitHubMiner.model;
 
+import aiss.GitHubMiner.model.CommitData.CommitProperty;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 
 public class Commit {
 
+    @JsonIgnore
+    public CommitProperty commit;
+
     @JsonProperty("id")
     private String id;
+
+    @JsonIgnore
+    private String sha;
 
     @JsonProperty("title")
     private String title;
@@ -25,29 +34,20 @@ public class Commit {
     @JsonProperty("web_url")
     private String webUrl;
 
-    //Constructor
-
-
-    public Commit(String id, String title, String message,
-                  String authorName, String authorEmail, String authoredDate,
-                  String webUrl) {
-        this.id = id;
-        this.title = title;
-        this.message = message;
-        this.authorName = authorName;
-        this.authorEmail = authorEmail;
-        this.authoredDate = authoredDate;
-        this.webUrl = webUrl;
-    }
-
-    //Getters & Setters
-
     public String getId() {
         return id;
     }
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getSha() {
+        return sha;
+    }
+
+    public void setSha(String sha) {
+        this.sha = sha;
     }
 
     public String getTitle() {
@@ -98,19 +98,11 @@ public class Commit {
         this.webUrl = webUrl;
     }
 
-    //ToString
+    public CommitProperty getCommit() {
+        return commit;
+    }
 
-
-    @Override
-    public String toString() {
-        return "Commit{" +
-                "id='" + id + '\'' +
-                ", title='" + title + '\'' +
-                ", message='" + message + '\'' +
-                ", authorName='" + authorName + '\'' +
-                ", authorEmail='" + authorEmail + '\'' +
-                ", authoredDate='" + authoredDate + '\'' +
-                ", webUrl='" + webUrl + '\'' +
-                '}';
+    public void setCommit(CommitProperty commit) {
+        this.commit = commit;
     }
 }

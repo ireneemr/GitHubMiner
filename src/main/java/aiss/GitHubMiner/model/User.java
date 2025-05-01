@@ -1,17 +1,20 @@
 
 package aiss.GitHubMiner.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
 public class User {
 
     @JsonProperty("id")
     private String id;
 
-    @JsonProperty("login")
+    @JsonProperty("username")
     private String username;
+
+    @JsonProperty("login")
+    @JsonIgnore
+    private String login;
 
     @JsonProperty("name")
     private String name;
@@ -19,7 +22,11 @@ public class User {
     @JsonProperty("avatar_url")
     private String avatarUrl;
 
-    @JsonProperty("url")
+    @JsonProperty("html_url")
+    @JsonIgnore
+    private String htmlUrl;
+
+    @JsonProperty("web_url")
     private String webUrl;
 
     public String getId() {
@@ -38,6 +45,14 @@ public class User {
         this.username = username;
     }
 
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
     public String getName() {
         return name;
     }
@@ -54,6 +69,14 @@ public class User {
         this.avatarUrl = avatarUrl;
     }
 
+    public String getHtmlUrl() {
+        return htmlUrl;
+    }
+
+    public void setHtmlUrl(String htmlUrl) {
+        this.htmlUrl = htmlUrl;
+    }
+
     public String getWebUrl() {
         return webUrl;
     }
@@ -62,14 +85,5 @@ public class User {
         this.webUrl = webUrl;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id='" + id + '\'' +
-                ", username='" + username + '\'' +
-                ", name='" + name + '\'' +
-                ", avatarUrl='" + avatarUrl + '\'' +
-                ", webUrl='" + webUrl + '\'' +
-                '}';
-    }
+
 }

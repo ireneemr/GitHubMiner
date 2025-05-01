@@ -1,13 +1,29 @@
-package aiss.GitHubMiner.model.Dto;
+package aiss.GitHubMiner.model.IssueData;
 
+import aiss.GitHubMiner.model.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.List;
 
-public class IssueDto {
 
+public class IssueData {
+
+    @JsonProperty("id")
     private String id;
+
+    @JsonProperty("number")
+    private String number;
+
+    @JsonProperty("title")
     private String title;
+
+    @JsonProperty("body")
+    private String body;
+
+    @JsonProperty("description")
     private String description;
+
+    @JsonProperty("state")
     private String state;
 
     @JsonProperty("created_at")
@@ -19,28 +35,18 @@ public class IssueDto {
     @JsonProperty("closed_at")
     private String closedAt;
 
-    private List<String> labels;
+    @JsonProperty("user")
+    private User user;
 
-    private int votes;
+    @JsonProperty("assignee")
+    private User assignee;
 
-    //Constructor
+    @JsonProperty("html_url")
+    private String htmlUrl;
 
+    @JsonProperty("labels")
+    private List<Label> labels;
 
-    public IssueDto(String id, String title, String description, String state,
-                    String createdAt, String updatedAt, String closedAt,
-                    List<String> labels, int votes) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.state = state;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-        this.closedAt = closedAt;
-        this.labels = labels;
-        this.votes = votes;
-    }
-
-    //Getters & Setters
 
 
     public String getId() {
@@ -51,12 +57,28 @@ public class IssueDto {
         this.id = id;
     }
 
+    public String getNumber() {
+        return number;
+    }
+
+    public void setNumber(String number) {
+        this.number = number;
+    }
+
     public String getTitle() {
         return title;
     }
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public String getBody() {
+        return body;
+    }
+
+    public void setBody(String body) {
+        this.body = body;
     }
 
     public String getDescription() {
@@ -99,19 +121,36 @@ public class IssueDto {
         this.closedAt = closedAt;
     }
 
-    public List<String> getLabels() {
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public User getAssignee() {
+        return assignee;
+    }
+
+    public void setAssignee(User assignee) {
+        this.assignee = assignee;
+    }
+
+    public String getHtmlUrl() {
+        return htmlUrl;
+    }
+
+    public void setHtmlUrl(String htmlUrl) {
+        this.htmlUrl = htmlUrl;
+    }
+
+    public List<Label> getLabels() {
         return labels;
     }
 
-    public void setLabels(List<String> labels) {
+    public void setLabels(List<Label> labels) {
         this.labels = labels;
     }
 
-    public int getVotes() {
-        return votes;
-    }
-
-    public void setVotes(int votes) {
-        this.votes = votes;
-    }
 }

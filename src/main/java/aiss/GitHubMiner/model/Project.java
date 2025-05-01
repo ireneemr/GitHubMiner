@@ -1,36 +1,42 @@
 package aiss.GitHubMiner.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotEmpty;
 
+import java.util.ArrayList;
 import java.util.List;
 
+
 public class Project {
+
+    @Id
     @JsonProperty("id")
-    private String id;
+    public String id;
 
     @JsonProperty("name")
-    private String name;
+    @NotEmpty(message= "The name of the project cannot be empty")
+    public String name;
 
     @JsonProperty("web_url")
-    private String web_url;
+    @NotEmpty(message="The web url of the project cannot be empty")
+    private String webUrl;
+
+    @JsonProperty("html_url")
+    @JsonIgnore
+    @NotEmpty(message= "The web url of the project cannot be empty")
+    private String htmlUrl;
 
     @JsonProperty("commits")
     private List<Commit> commits;
 
-    //Constructor
-    public Project(String id, String name, String web_url) {
-        this.id = id;
-        this.name = name;
-        this.web_url = web_url;
-        this.commits = commits;
-    }
-    //Getters & Setters
-    public String getName() {
-        return name;
-    }
+    @JsonProperty("issues")
+    private List<Issue> issues;
 
-    public void setName(String name) {
-        this.name = name;
+    public Project() {
+        commits = new ArrayList<>();
+        issues = new ArrayList<>();
     }
 
     public String getId() {
@@ -41,12 +47,28 @@ public class Project {
         this.id = id;
     }
 
-    public String getWeb_url() {
-        return web_url;
+    public String getName() {
+        return name;
     }
 
-    public void setWeb_url(String web_url) {
-        this.web_url = web_url;
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getWebUrl() {
+        return webUrl;
+    }
+
+    public void setWebUrl(String webUrl) {
+        this.webUrl = webUrl;
+    }
+
+    public String getHtmlUrl() {
+        return htmlUrl;
+    }
+
+    public void setHtmlUrl(String htmlUrl) {
+        this.htmlUrl = htmlUrl;
     }
 
     public List<Commit> getCommits() {
@@ -57,16 +79,11 @@ public class Project {
         this.commits = commits;
     }
 
-    //ToString
+    public List<Issue> getIssues() {
+        return issues;
+    }
 
-
-    @Override
-    public String toString() {
-        return "Project{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", web_url='" + web_url + '\'' +
-                ", commits=" + commits +
-                '}';
+    public void setIssues(List<Issue> issues) {
+        this.issues = issues;
     }
 }
