@@ -18,14 +18,18 @@ public class Project {
     @JsonProperty("commits")
     private List<Commit> commits;
 
-    //Constructor
+    @JsonProperty("issues")
+    private List<Issue> issues;
+
+
     public Project(String id, String name, String web_url) {
         this.id = id;
         this.name = name;
         this.web_url = web_url;
-        this.commits = commits;
+        commits = new ArrayList<>();
+        issues = new ArrayList<>();
     }
-    //Getters & Setters
+
     public String getName() {
         return name;
     }
@@ -58,8 +62,13 @@ public class Project {
         this.commits = commits;
     }
 
-    //ToString
+    public List<Issue> getIssues() {
+        return issues;
+    }
 
+    public void setIssues(List<Issue> issues) {
+        this.issues = issues;
+    }
 
     @Override
     public String toString() {
