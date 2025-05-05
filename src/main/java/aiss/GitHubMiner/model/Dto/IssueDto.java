@@ -3,12 +3,18 @@ package aiss.GitHubMiner.model.Dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class IssueDto {
 
-    private String id;
+    @JsonProperty("number")
+    private String number;
+
     private String title;
+
+    @JsonProperty("body")
     private String description;
+
     private String state;
 
     @JsonProperty("created_at")
@@ -20,118 +26,74 @@ public class IssueDto {
     @JsonProperty("closed_at")
     private String closedAt;
 
-    private List<String> labels;
+    private List<Label> labels;
 
-    private int votes;
+    private Reactions reactions;
 
-    //Constructor
+    @JsonProperty("user")
+    private UserDto author;
 
+    @JsonProperty("assignee")
+    private UserDto assignee;
 
-    public IssueDto(String id, String title, String description, String state,
-                    String createdAt, String updatedAt, String closedAt,
-                    List<String> labels, int votes) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.state = state;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
-        this.closedAt = closedAt;
-        this.labels = labels;
-        this.votes = votes;
-    }
-
-    //Getters & Setters
-
+    // GETTERS adaptados
 
     public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
+        return number;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public String getDescription() {
         return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public String getState() {
         return state;
     }
 
-    public void setState(String state) {
-        this.state = state;
-    }
-
     public String getCreatedAt() {
         return createdAt;
-    }
-
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
     }
 
     public String getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(String updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
     public String getClosedAt() {
         return closedAt;
     }
 
-    public void setClosedAt(String closedAt) {
-        this.closedAt = closedAt;
-    }
-
     public List<String> getLabels() {
-        return labels;
-    }
-
-    public void setLabels(List<String> labels) {
-        this.labels = labels;
+        if (labels == null) return null;
+        return labels.stream().map(Label::getName).collect(Collectors.toList());
     }
 
     public int getVotes() {
-        return votes;
+        if (reactions == null) return 0;
+        return reactions.getPlusOne();
     }
 
-    public void setVotes(int votes) {
-        this.votes = votes;
+    public UserDto getAuthor() {
+        return author;
     }
 
+    public UserDto getAssignee() {
+        return assignee;
+    }
 
-    //ToString
+    // Subclases para mapear correctamente los objetos anidados
 
+    public static class Label {
+        private String name;
+        public String getName() { return name; }
+    }
 
-    @Override
-    public String toString() {
-        return "IssueDto{" +
-                "id='" + id + '\'' +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", state='" + state + '\'' +
-                ", createdAt='" + createdAt + '\'' +
-                ", updatedAt='" + updatedAt + '\'' +
-                ", closedAt='" + closedAt + '\'' +
-                ", labels=" + labels +
-                ", votes=" + votes +
-                '}';
+    public static class Reactions {
+        @JsonProperty("+1")
+        private int plusOne;
+        public int getPlusOne() { return plusOne; }
     }
 }

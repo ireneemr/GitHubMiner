@@ -38,21 +38,29 @@ public class CommentService {
         );
     }
     public List<Comment> getComments(String owner, String repo,String issueId) {
-        String uri = baseUri + owner + "/" + repo + "/isssues" + issueId + "/comments";
+        String uri = baseUri + owner + "/" + repo + "/issues/" + issueId + "/comments";
         HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization","Bearer " + token);
+        headers.set("Authorization", "Bearer " + token);
 
         HttpEntity<String> entity = new HttpEntity<>(headers);
-        ResponseEntity<CommentDto[]> response = restTemplate.exchange(uri, HttpMethod.GET,
-                                                entity, CommentDto[].class);
 
-        List<Comment> comments = new ArrayList<>();
-        for (CommentDto commentDto : response.getBody()) {
-            comments.add(convertToModel(commentDto));
+        try {
+            ResponseEntity<CommentDto[]> response = restTemplate.exchange(
+                    uri, HttpMethod.GET, entity, CommentDto[].class);
+
+            List<Comment> comments = new ArrayList<>();
+            if (response.getBody() != null) {
+                for (CommentDto commentDto : response.getBody()) {
+                    comments.add(convertToModel(commentDto));
+                }
+            }
+
+            return comments;
+        } catch (Exception e) {
+            System.err.println("ERROR fetching comments: " + e.getMessage());
+            e.printStackTrace();
+            throw e; // vuelve a lanzarla para ver qué te da en el controller
         }
-
-        return comments;
-
-
     }
+
 }
