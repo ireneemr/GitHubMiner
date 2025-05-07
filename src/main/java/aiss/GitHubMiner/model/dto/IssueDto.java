@@ -36,6 +36,7 @@ public class IssueDto {
     @JsonProperty("assignee")
     private UserDto assignee;
 
+
     // GETTERS adaptados
 
     public String getId() {
@@ -83,6 +84,8 @@ public class IssueDto {
     public UserDto getAssignee() {
         return assignee;
     }
+
+
 
     // Subclases para mapear correctamente los objetos anidados
 

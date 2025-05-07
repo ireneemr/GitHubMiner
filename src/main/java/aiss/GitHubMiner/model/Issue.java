@@ -33,6 +33,10 @@ public class Issue {
     @JsonProperty("votes")
     private int votes;
 
+    @JsonProperty("comments")
+    private List<Comment> comments;
+
+
 
     public Issue(String id, String title, String description, String state,
                  String createdAt, String updatedAt, String closedAt,
@@ -46,8 +50,6 @@ public class Issue {
         this.closedAt = closedAt;
         this.labels = labels;
         this.votes = votes;
-
-
     }
 
 
@@ -123,7 +125,13 @@ public class Issue {
         this.closedAt = closedAt;
     }
 
+    public List<Comment> getComments() {
+        return comments;
+    }
 
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
 
     @Override
     public String toString() {

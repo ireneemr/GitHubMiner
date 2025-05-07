@@ -1,6 +1,9 @@
 package aiss.GitHubMiner.service;
 
+import aiss.GitHubMiner.model.Comment;
+import aiss.GitHubMiner.model.Commit;
 import aiss.GitHubMiner.model.Issue;
+import aiss.GitHubMiner.model.dto.CommentDto;
 import aiss.GitHubMiner.model.dto.IssueDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -12,13 +15,18 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class IssueService {
 
     @Value("${token}")
     private String token;
+
+    @Autowired
+    private CommentService commentService;
 
     @Autowired
     private RestTemplate restTemplate;
@@ -59,11 +67,17 @@ public class IssueService {
 
             if (response.getBody() != null) {
                 for (IssueDto issueDto : response.getBody()) {
-                    allIssues.add(ConvertToModel(issueDto));
+                    Issue issue = ConvertToModel(issueDto);
+
+                    // Obtener comentarios usando el número del issue
+                    String issueId = issueDto.getId();
+                    List<Comment> comments = getComments(owner, repo, issueId);
+                    issue.setComments(comments);
+
+                    allIssues.add(issue);
                 }
             }
 
-            // Check the Link header for the next page
             String linkHeader = response.getHeaders().getFirst("Link");
             if (linkHeader != null && linkHeader.contains("rel=\"next\"")) {
                 currentPage++;
@@ -74,4 +88,27 @@ public class IssueService {
 
         return allIssues;
     }
+
+
+    public List<Comment> getComments(String owner, String repo, String issueId) {
+        String uri = baseUri + owner + "/" + repo + "/issues/" + issueId + "/comments";
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + token);
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+
+        ResponseEntity<CommentDto[]> response = restTemplate.exchange(
+                uri,
+                HttpMethod.GET,
+                entity,
+                CommentDto[].class
+        );
+
+        List<CommentDto> commentDTOs = Arrays.asList(response.getBody());
+
+        return commentDTOs.stream()
+                .map(dto -> new Comment(dto.getId(), dto.getBody(), dto.getCreated_at(), dto.getUpdated_at()))
+                .collect(Collectors.toList());
+    }
+
 }
