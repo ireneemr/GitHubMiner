@@ -1,33 +1,33 @@
-
 package aiss.GitHubMiner.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class User {
 
     @JsonProperty("id")
-    private String id;
-
-    @JsonProperty("username")
-    private String username;
+    public String id;
 
     @JsonProperty("login")
-    @JsonIgnore
-    private String login;
+    public String username;
 
     @JsonProperty("name")
-    private String name;
+    public String name;
 
     @JsonProperty("avatar_url")
-    private String avatarUrl;
+    public String avatarUrl;
 
-    @JsonProperty("html_url")
-    @JsonIgnore
-    private String htmlUrl;
+    @JsonProperty("url")
+    public String webUrl;
 
-    @JsonProperty("web_url")
-    private String webUrl;
+
+    public User(String id, String username, String name, String avatarUrl, String webUrl) {
+        this.id = id;
+        this.username = username;
+        this.name = name;
+        this.avatarUrl = avatarUrl;
+        this.webUrl = webUrl;
+    }
+
 
     public String getId() {
         return id;
@@ -43,14 +43,6 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getLogin() {
-        return login;
-    }
-
-    public void setLogin(String login) {
-        this.login = login;
     }
 
     public String getName() {
@@ -69,14 +61,6 @@ public class User {
         this.avatarUrl = avatarUrl;
     }
 
-    public String getHtmlUrl() {
-        return htmlUrl;
-    }
-
-    public void setHtmlUrl(String htmlUrl) {
-        this.htmlUrl = htmlUrl;
-    }
-
     public String getWebUrl() {
         return webUrl;
     }
@@ -85,5 +69,16 @@ public class User {
         this.webUrl = webUrl;
     }
 
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id='" + id + '\'' +
+                ", username='" + username + '\'' +
+                ", name='" + name + '\'' +
+                ", avatarUrl='" + avatarUrl + '\'' +
+                ", webUrl='" + webUrl + '\'' +
+                '}';
+    }
 
 }

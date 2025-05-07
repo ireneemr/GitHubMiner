@@ -11,16 +11,18 @@ public class Comment {
     private String body;
 
     @JsonProperty("created_at")
-    private String createdAt;
+    private String created_at;
 
     @JsonProperty("updated_at")
-    private String updatedAt;
+    private String updated_at;
 
-    @JsonProperty("author")
-    private User author;
 
-    @JsonProperty("user")
-    private User user;
+    public Comment(String id, String body, String created_at, String updated_at) {
+        this.id = id;
+        this.body = body;
+        this.created_at = created_at;
+        this.updated_at = updated_at;
+    }
 
     public String getId() {
         return id;
@@ -38,35 +40,30 @@ public class Comment {
         this.body = body;
     }
 
-    public String getCreatedAt() {
-        return createdAt;
+    public String getCreated_at() {
+        return created_at;
     }
 
-    public void setCreatedAt(String createdAt) {
-        this.createdAt = createdAt;
+    public void setCreated_at(String created_at) {
+        this.created_at = created_at;
     }
 
-    public String getUpdatedAt() {
-        return updatedAt;
+    public String getUpdated_at() {
+        return updated_at;
     }
 
-    public void setUpdatedAt(String updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setUpdated_at(String updated_at) {
+        this.updated_at = updated_at;
     }
 
-    public User getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(User author) {
-        this.author = author;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
+    @Override
+    public String toString() {
+        return "Comment{" +
+                "id='" + id + '\'' +
+                ", body='" + body + '\'' +
+                ", created_at='" + created_at + '\'' +
+                ", updated_at='" + updated_at + '\'' +
+                '}';
     }
 }
+
