@@ -17,8 +17,6 @@ public class GitHubController {
     @Autowired
     RestTemplate restTemplate;
 
-    final String gitMinerUri= "http://localhost:8082/githubminer/projects";
-
     @GetMapping("/{owner}/{repo}")
     public Project getData(@PathVariable String owner, @PathVariable String repo,
                            @RequestParam(defaultValue = "5") Integer sinceCommits,
@@ -28,22 +26,14 @@ public class GitHubController {
     }
 
     @PostMapping("/{owner}/{repo}")
-    public Project sendData(@PathVariable String owner, @PathVariable String repo,
-                            @RequestParam (defaultValue = "5") Integer sinceCommits,
-                            @RequestParam (defaultValue = "20") Integer sinceIssues,
-                            @RequestParam(defaultValue = "2") Integer maxPages) {
-
+    public ResponseEntity<String> sendProject(@PathVariable String owner,
+                                              @PathVariable String repo,
+                                              @RequestParam(defaultValue = "5") Integer sinceCommits,
+                                              @RequestParam(defaultValue = "30") Integer sinceIssues,
+                                              @RequestParam(defaultValue = "2") Integer maxPages) {
         Project project = projectService.getProject(owner, repo, sinceCommits, sinceIssues, maxPages);
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-
-        HttpEntity<Project> request = new HttpEntity<>(project, headers);
-        ResponseEntity<Project> response = restTemplate.exchange(
-                gitMinerUri, HttpMethod.POST, request, Project.class
-        );
-
-        return response.getBody();
+        projectService.sendProjectToGitMiner(project);
+        return ResponseEntity.ok("Project sent successfully to GitMiner");
     }
 
 }

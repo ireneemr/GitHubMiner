@@ -14,7 +14,7 @@ public class Project {
     private String name;
 
     @JsonProperty("web_url")
-    private String web_url;
+    private String webUrl;
 
     @JsonProperty("commits")
     private List<Commit> commits;
@@ -23,10 +23,10 @@ public class Project {
     private List<Issue> issues;
 
 
-    public Project(String id, String name, String web_url) {
+    public Project(String id, String name, String webUrl) {
         this.id = id;
         this.name = name;
-        this.web_url = web_url;
+        this.webUrl = webUrl;
         commits = new ArrayList<>();
         issues = new ArrayList<>();
     }
@@ -47,12 +47,12 @@ public class Project {
         this.id = id;
     }
 
-    public String getWeb_url() {
-        return web_url;
+    public String getWebUrl() {
+        return webUrl;
     }
 
-    public void setWeb_url(String web_url) {
-        this.web_url = web_url;
+    public void setWebUrl(String webUrl) {
+        this.webUrl = webUrl;
     }
 
     public List<Commit> getCommits() {
@@ -76,7 +76,7 @@ public class Project {
         return "Project{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
-                ", web_url='" + web_url + '\'' +
+                ", web_url='" + webUrl + '\'' +
                 ", commits=" + commits +
                 '}';
     }

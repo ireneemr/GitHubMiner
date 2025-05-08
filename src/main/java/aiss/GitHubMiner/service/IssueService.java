@@ -3,7 +3,6 @@ package aiss.GitHubMiner.service;
 import aiss.GitHubMiner.model.Comment;
 import aiss.GitHubMiner.model.Issue;
 import aiss.GitHubMiner.model.User;
-import aiss.GitHubMiner.model.dto.CommentDto;
 import aiss.GitHubMiner.model.dto.IssueDto;
 import aiss.GitHubMiner.model.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +15,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 @Service
 public class IssueService {

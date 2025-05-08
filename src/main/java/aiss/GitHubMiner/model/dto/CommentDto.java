@@ -10,11 +10,11 @@ public class CommentDto {
     @JsonProperty("body")
     private String body;
 
-    @JsonProperty("created_at")
-    private String created_at;
+    @JsonProperty("createdAt")
+    private String createdAt;
 
-    @JsonProperty("updated_at")
-    private String updated_at;
+    @JsonProperty("updatedAt")
+    private String updatedAt;
 
     @JsonProperty("user")
     private UserDto author;
@@ -36,20 +36,20 @@ public class CommentDto {
         this.body = body;
     }
 
-    public String getCreated_at() {
-        return created_at;
+    public String getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreated_at(String created_at) {
-        this.created_at = created_at;
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public String getUpdated_at() {
-        return updated_at;
+    public String getUpdatedAt() {
+        return updatedAt;
     }
 
-    public void setUpdated_at(String updated_at) {
-        this.updated_at = updated_at;
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     public UserDto getAuthor() {
@@ -65,8 +65,8 @@ public class CommentDto {
         return "CommentDto{" +
                 "id='" + id + '\'' +
                 ", body='" + body + '\'' +
-                ", created_at='" + created_at + '\'' +
-                ", updated_at='" + updated_at + '\'' +
+                ", created_at='" + createdAt + '\'' +
+                ", updated_at='" + updatedAt + '\'' +
                 ", author=" + author +
                 '}';
     }

@@ -5,19 +5,19 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class UserDto {
 
     @JsonProperty("id")
-    private String id;  // ID único del usuario
+    private String id;
 
     @JsonProperty("login")
-    private String username;  // Nombre de usuario en GitHub
+    private String username;
 
     @JsonProperty("name")
-    private String name;  // Nombre completo del usuario
+    private String name;
 
     @JsonProperty("avatar_url")
-    private String avatarUrl;  // URL de la imagen de avatar del usuario
+    private String avatarUrl;
 
     @JsonProperty("url")
-    private String webUrl;  // URL al perfil del usuario en GitHub
+    private String webUrl;
 
 
     public String getId() {

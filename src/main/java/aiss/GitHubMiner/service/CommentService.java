@@ -43,8 +43,8 @@ public class CommentService {
         return new Comment(
                 commentDto.getId(),
                 commentDto.getBody(),
-                commentDto.getCreated_at(),
-                commentDto.getUpdated_at(),
+                commentDto.getCreatedAt(),
+                commentDto.getUpdatedAt(),
                 author
         );
     }
