@@ -1,5 +1,6 @@
 package aiss.GitHubMiner.model.dto;
 
+import aiss.GitHubMiner.model.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.List;
@@ -99,4 +100,6 @@ public class IssueDto {
         private int plusOne;
         public int getPlusOne() { return plusOne; }
     }
+
+
 }

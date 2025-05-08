@@ -1,7 +1,9 @@
 package aiss.GitHubMiner.service;
 
 import aiss.GitHubMiner.model.Comment;
+import aiss.GitHubMiner.model.User;
 import aiss.GitHubMiner.model.dto.CommentDto;
+import aiss.GitHubMiner.model.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -27,11 +29,23 @@ public class CommentService {
 
 
     public Comment convertToModel(CommentDto commentDto) {
+        UserDto authorDto = commentDto.getAuthor();
+        User author = null;
+        if (authorDto != null) {
+            author = new User(
+                    authorDto.getId(),
+                    authorDto.getUsername(),
+                    authorDto.getName(),
+                    authorDto.getAvatarUrl(),
+                    authorDto.getWebUrl()
+            );
+        }
         return new Comment(
                 commentDto.getId(),
                 commentDto.getBody(),
                 commentDto.getCreated_at(),
-                commentDto.getUpdated_at()
+                commentDto.getUpdated_at(),
+                author
         );
     }
     public List<Comment> getComments(String owner, String repo, String issueId) {

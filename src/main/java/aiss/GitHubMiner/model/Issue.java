@@ -33,14 +33,19 @@ public class Issue {
     @JsonProperty("votes")
     private int votes;
 
+    @JsonProperty("author")
+    private User author;
+
+    @JsonProperty("assignee")
+    private User assignee;
+
     @JsonProperty("comments")
     private List<Comment> comments;
 
 
-
     public Issue(String id, String title, String description, String state,
                  String createdAt, String updatedAt, String closedAt,
-                 List<String> labels, int votes) {
+                 List<String> labels, int votes, User author, User assignee) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -50,6 +55,8 @@ public class Issue {
         this.closedAt = closedAt;
         this.labels = labels;
         this.votes = votes;
+        this.author = author;
+        this.assignee = assignee;
     }
 
 
@@ -127,6 +134,22 @@ public class Issue {
 
     public List<Comment> getComments() {
         return comments;
+    }
+
+    public User getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(User author) {
+        this.author = author;
+    }
+
+    public User getAssignee() {
+        return assignee;
+    }
+
+    public void setAssignee(User assignee) {
+        this.assignee = assignee;
     }
 
     public void setComments(List<Comment> comments) {

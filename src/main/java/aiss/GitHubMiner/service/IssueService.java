@@ -1,10 +1,11 @@
 package aiss.GitHubMiner.service;
 
 import aiss.GitHubMiner.model.Comment;
-import aiss.GitHubMiner.model.Commit;
 import aiss.GitHubMiner.model.Issue;
+import aiss.GitHubMiner.model.User;
 import aiss.GitHubMiner.model.dto.CommentDto;
 import aiss.GitHubMiner.model.dto.IssueDto;
+import aiss.GitHubMiner.model.dto.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
@@ -34,6 +35,32 @@ public class IssueService {
     private final String baseUri = "https://api.github.com/repos/";
 
     public Issue ConvertToModel(IssueDto issueDto) {
+        UserDto authorDto = issueDto.getAuthor();
+        UserDto assigneeDto = issueDto.getAssignee();
+
+        User author = null;
+        User assignee = null;
+
+        if (authorDto != null) {
+            author = new User(
+                    authorDto.getId(),
+                    authorDto.getUsername(),
+                    authorDto.getName(),
+                    authorDto.getAvatarUrl(),
+                    authorDto.getWebUrl()
+            );
+        }
+
+        if (assigneeDto != null) {
+            assignee = new User(
+                    assigneeDto.getId(),
+                    assigneeDto.getUsername(),
+                    assigneeDto.getName(),
+                    assigneeDto.getAvatarUrl(),
+                    assigneeDto.getWebUrl()
+            );
+        }
+
         return new Issue(
                 issueDto.getId(),
                 issueDto.getTitle(),
@@ -43,7 +70,9 @@ public class IssueService {
                 issueDto.getUpdatedAt(),
                 issueDto.getClosedAt(),
                 issueDto.getLabels(),
-                issueDto.getVotes()
+                issueDto.getVotes(),
+                author,
+                assignee
         );
     }
 
@@ -91,24 +120,7 @@ public class IssueService {
 
 
     public List<Comment> getComments(String owner, String repo, String issueId) {
-        String uri = baseUri + owner + "/" + repo + "/issues/" + issueId + "/comments";
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.set("Authorization", "Bearer " + token);
-        HttpEntity<String> entity = new HttpEntity<>(headers);
-
-        ResponseEntity<CommentDto[]> response = restTemplate.exchange(
-                uri,
-                HttpMethod.GET,
-                entity,
-                CommentDto[].class
-        );
-
-        List<CommentDto> commentDTOs = Arrays.asList(response.getBody());
-
-        return commentDTOs.stream()
-                .map(dto -> new Comment(dto.getId(), dto.getBody(), dto.getCreated_at(), dto.getUpdated_at()))
-                .collect(Collectors.toList());
+        return commentService.getComments(owner, repo, issueId);
     }
 
 }
