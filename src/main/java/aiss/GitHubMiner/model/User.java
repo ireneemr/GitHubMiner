@@ -7,25 +7,25 @@ public class User {
     @JsonProperty("id")
     public String id;
 
-    @JsonProperty("login")
+    @JsonProperty("username")
     public String username;
 
     @JsonProperty("name")
     public String name;
 
     @JsonProperty("avatar_url")
-    public String avatarUrl;
+    public String avatar_url;
 
     @JsonProperty("url")
-    public String webUrl;
+    public String web_url;
 
 
-    public User(String id, String username, String name, String avatarUrl, String webUrl) {
+    public User(String id, String username, String name, String avatar_url, String web_url) {
         this.id = id;
         this.username = username;
         this.name = name;
-        this.avatarUrl = avatarUrl;
-        this.webUrl = webUrl;
+        this.avatar_url = avatar_url;
+        this.web_url = web_url;
     }
 
 
@@ -54,19 +54,19 @@ public class User {
     }
 
     public String getAvatarUrl() {
-        return avatarUrl;
+        return avatar_url;
     }
 
     public void setAvatarUrl(String avatarUrl) {
-        this.avatarUrl = avatarUrl;
+        this.avatar_url = avatarUrl;
     }
 
     public String getWebUrl() {
-        return webUrl;
+        return web_url;
     }
 
     public void setWebUrl(String webUrl) {
-        this.webUrl = webUrl;
+        this.web_url = webUrl;
     }
 
 
@@ -76,8 +76,8 @@ public class User {
                 "id='" + id + '\'' +
                 ", username='" + username + '\'' +
                 ", name='" + name + '\'' +
-                ", avatarUrl='" + avatarUrl + '\'' +
-                ", webUrl='" + webUrl + '\'' +
+                ", avatarUrl='" + avatar_url + '\'' +
+                ", webUrl='" + web_url + '\'' +
                 '}';
     }
 

@@ -10,10 +10,10 @@ public class CommentDto {
     @JsonProperty("body")
     private String body;
 
-    @JsonProperty("createdAt")
+    @JsonProperty("created_at")
     private String createdAt;
 
-    @JsonProperty("updatedAt")
+    @JsonProperty("updated_at")
     private String updatedAt;
 
     @JsonProperty("user")

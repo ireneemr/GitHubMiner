@@ -18,7 +18,7 @@ public class ProjectService {
     @Value("${token}")
     private String token;
 
-    final String gitMinerUri= "http://localhost:8080/githubminer/projects";
+    final String gitMinerUri= "http://localhost:8080/gitminer/projects/recive";
 
     @Autowired
     private RestTemplate restTemplate;
